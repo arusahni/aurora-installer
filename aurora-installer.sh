@@ -41,9 +41,11 @@ killall firefox
 
 install_firefox
 
-if [[ -e "$SYSFF_BIN_PATH" && "$INSTALL_DIR"firefox/firefox != "$CURRENT_BIN" ]]; then
-	echo "Renaming the system Firefox to firefox-system"
-	mv "$SYSFF_BIN_PATH" "$SYSFF_BIN_PATH"-system
+if [[ "$INSTALL_DIR"firefox/firefox != "$CURRENT_BIN" ]]; then
+	if [[ -e "$SYSFF_BIN_PATH" ]]; then
+		echo "Renaming the system Firefox to firefox-system"
+		mv "$SYSFF_BIN_PATH" "$SYSFF_BIN_PATH"-system
+	fi
 	ln -s "$INSTALL_DIR"firefox/firefox "$SYSFF_BIN_PATH"
 fi
 
