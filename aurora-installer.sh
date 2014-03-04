@@ -32,7 +32,8 @@ function install_firefox ()
 		mv "$INSTALL_DIR"/firefox "$INSTALL_DIR"/firefox-old
 	fi
 	mv /tmp/firefox "$INSTALL_DIR"/firefox
-	ln -sf /usr/lib/mozilla/plugins/ /opt/firefox/browser/plugins
+	ln -sf /usr/lib/mozilla/plugins/ "$INSTALL_DIR"/firefox/browser/plugins
+    chown -R "$SUDO_USER" "$INSTALL_DIR"/firefox
 }
 
 CURRENT_BIN=$(readlink $SYSFF_BIN_PATH)
