@@ -23,7 +23,7 @@ SYSFF_PLUGIN_PATH=/usr/lib/firefox/plugins
 function install_firefox ()
 {
 	echo "Downloading firefox"
-	BUNDLE=$(curl --progress-bar -L "$FIREFOX_URL" | grep "$FIREFOX_PLATFORM" | tail -1 | tr -s ' ' | cut -d ' ' -f 9)
+	BUNDLE=$(curl -s -L "$FIREFOX_URL" | grep "$FIREFOX_PLATFORM" | tail -1 | tr -s ' ' | cut -d ' ' -f 9)
 	wget -P /tmp/ -N "$FIREFOX_URL""$BUNDLE"
 	tar -C /tmp/ -xjf /tmp/"$BUNDLE"
 	if [[ -d "$INSTALL_DIR"/firefox ]]; then
