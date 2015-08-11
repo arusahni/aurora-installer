@@ -14,7 +14,7 @@ if [ $UID != $ROOT_UID ]; then
     exit 1
 fi
 
-FIREFOX_URL=ftp://ftp.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora/
+FIREFOX_URL=http://archive.mozilla.org/pub/firefox/nightly/latest-mozilla-aurora/
 FIREFOX_PLATFORM=en-US.linux-x86_64.tar.bz2
 INSTALL_DIR=/opt/
 SYSFF_BIN_PATH=/usr/bin/firefox
@@ -23,7 +23,7 @@ SYSFF_PLUGIN_PATH=/usr/lib/firefox/plugins
 function install_firefox ()
 {
 	echo "Downloading firefox"
-	BUNDLE=$(curl -s -L "$FIREFOX_URL" | grep "$FIREFOX_PLATFORM" | tail -1 | tr -s ' ' | cut -d ' ' -f 9)
+	BUNDLE=$(curl -s -L "$FIREFOX_URL" | grep "$FIREFOX_PLATFORM" | tail -1 | sed -n "/href/ s/.*href=['\"]\([^'\"]*\)['\"].*/\1/gp")
 	wget -P /tmp/ -N "$FIREFOX_URL""$BUNDLE"
 	tar -C /tmp/ -xjf /tmp/"$BUNDLE"
 	if [[ -d "$INSTALL_DIR"/firefox ]]; then
