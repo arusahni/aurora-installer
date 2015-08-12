@@ -35,6 +35,7 @@ function install_firefox ()
 	mv /tmp/firefox "$INSTALL_DIR"/firefox
 	ln -sf /usr/lib/mozilla/plugins/ "$INSTALL_DIR"/firefox/browser/plugins
     chown -R "$SUDO_USER" "$INSTALL_DIR"/firefox
+    chown "$SUDO_USER" /tmp/"$BUNDLE" # allow users to delete the installation file if they want
 }
 
 CURRENT_BIN=$(readlink $SYSFF_BIN_PATH)
