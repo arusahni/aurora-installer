@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright © 2013 Aru Sahni <arusahni@gmail.com>
+# Copyright © 2015 Aru Sahni <arusahni@gmail.com>
 # This work is free. It comes without any warranty, to the extent
 # permitted by applicable law. You can redistribute it and/or modify it
 # under the terms of the Do What The Fuck You Want To Public License,
@@ -26,6 +26,7 @@ function install_firefox ()
 	BUNDLE=$(curl -s -L "$FIREFOX_URL" | grep "$FIREFOX_PLATFORM" | tail -1 | sed -n "/href/ s/.*href=['\"]\([^'\"]*\)['\"].*/\1/gp")
 	wget -P /tmp/ -N "$FIREFOX_URL""$BUNDLE"
 	tar -C /tmp/ -xjf /tmp/"$BUNDLE"
+    killall firefox
 	if [[ -d "$INSTALL_DIR"/firefox ]]; then
 		echo "Existing version of firefox detected. Backing up and upgrading."
 		rm -rf "$INSTALL_DIR"/firefox-old
@@ -37,8 +38,6 @@ function install_firefox ()
 }
 
 CURRENT_BIN=$(readlink $SYSFF_BIN_PATH)
-
-killall firefox
 
 install_firefox
 
