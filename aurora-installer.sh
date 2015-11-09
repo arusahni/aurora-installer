@@ -23,7 +23,8 @@ SYSFF_PLUGIN_PATH=/usr/lib/firefox/plugins
 function install_firefox ()
 {
 	echo "Downloading firefox"
-	BUNDLE=$(curl -s -L "$FIREFOX_URL" | grep "$FIREFOX_PLATFORM" | tail -1 | sed -n "/href/ s/.*href=['\"]\([^'\"]*\)['\"].*/\1/gp")
+	RELATIVE_PATH=$(curl -s -L "$FIREFOX_URL" | grep "$FIREFOX_PLATFORM" | tail -1 | sed -n "/href/ s/.*href=['\"]\([^'\"]*\)['\"].*/\1/gp")
+    BUNDLE=$(basename "$RELATIVE_PATH")
 	wget -P /tmp/ -N "$FIREFOX_URL""$BUNDLE"
 	tar -C /tmp/ -xjf /tmp/"$BUNDLE"
     killall firefox
