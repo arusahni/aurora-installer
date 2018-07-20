@@ -17,7 +17,7 @@ fi
 FIREFOX_PLATFORM=linux64
 FIREFOX_URL="https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=$FIREFOX_PLATFORM&lang=en-US"
 INSTALL_DIR=/opt/
-SYSFF_BIN_PATH=/usr/bin/firefox
+SYSFF_BIN_PATH=/usr/local/bin/firefox
 
 function install_firefox ()
 {
@@ -43,10 +43,6 @@ CURRENT_BIN=$(readlink $SYSFF_BIN_PATH)
 install_firefox
 
 if [[ "$INSTALL_DIR"firefox/firefox != "$CURRENT_BIN" ]]; then
-	if [[ -e "$SYSFF_BIN_PATH" ]]; then
-		echo "Renaming the system Firefox to firefox-system"
-		mv "$SYSFF_BIN_PATH" "$SYSFF_BIN_PATH"-system
-	fi
 	ln -s "$INSTALL_DIR"firefox/firefox "$SYSFF_BIN_PATH"
 fi
 
