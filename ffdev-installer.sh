@@ -7,6 +7,8 @@
 # Version 2, as published by Sam Hocevar.
 # See the COPYING file for more details.
 
+# https://github.com/arusahni/ffdev-installer
+
 ROOT_UID=0
 
 if [ $UID != $ROOT_UID ]; then
